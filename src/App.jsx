@@ -59,7 +59,6 @@ export default function App() {
       {(!displayCamera && !displayPhotobook) &&
       <header className = "menu">
         <h1>Photobook</h1>
-        <small>by Emerson Berido</small>
         <button
           className = "camera-option"
           onClick={() => setDisplayCamera(true)}
@@ -76,7 +75,6 @@ export default function App() {
       }
 
      {displayCamera && <main className = "black-box">
-        <h2>smile</h2>
 
         <section className = "polaroid-frame">
           
@@ -99,7 +97,7 @@ export default function App() {
             redo ?
           </button> :
           <button onClick = {capture} className = "snap">
-            snap !
+            s n a p !
           </button>
         }
 
@@ -115,7 +113,7 @@ export default function App() {
             type = "submit"
             className = "submit"
           >
-            submit ?
+            s u b m i t ?
           </button>
         </form>
 
@@ -136,7 +134,7 @@ export default function App() {
             setDisplayPhotobook(false);
           }}
         >
-          WATERMELON
+          X
         </button>
       }
 
