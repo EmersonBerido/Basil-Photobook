@@ -4,16 +4,23 @@ import {useState} from "react"
 import {useEffect} from "react"
 import './Photoshoot.css'
 import Webcam from "react-webcam";
+import Photobook from "./Photobook";
+
+//Components
 
 export default function App() {
   const cameraRef = useRef(null);
   const [image, setImage] = useState(null);
+  const [isPictureSatisfactory, setIsPictureSatisfactory] = useState(false);
   const [imageList, setImageList] = useState([])
+  const [displayCamera, setDisplayCamera] = useState(false);
+  const [displayPhotobook, setDisplayPhotobook] = useState(false)
 
   const capture = () => {
     console.log("reached capture before crashing")
     const imageSrc = cameraRef.current.getScreenshot();
     setImage(imageSrc);
+    setIsPictureSatisfactory(true);
   };
 
 
@@ -40,48 +47,101 @@ export default function App() {
         ]
       )
     })
+
+    //resets
+    setImage(null);
+    setIsPictureSatisfactory(false);
   }
 
-
   return (
-    <main>
-      <h2>smile</h2>
-
-      <section className = "polaroid-frame">
-        <Webcam
-          className = {"camera"}
-          ref = {cameraRef}
-          screenshotFormat = "image/png"
-          mirrored = {true}
-          videoConstraints={
-            {
-              width  : 300,
-              height : 300
-            }
-          }
-        />
-      </section>
-
-      <button onClick = {capture}>
-        Take Picture
-      </button>
-
-      <form onSubmit = {uploadImage}>
-        <input 
-          placeholder="Enter description here..." 
-          name = "description"
-        />
-        <button type = "submit">Submit</button>
-      </form>
-
-      {imageList.length > 0 &&
-      <>
-        <section>
-          <img src = {imageList[0].image}/>
-        </section>
-        <h1>{imageList[0].description}</h1>
-      </>
+    <main className = "program">
+      
+      {(!displayCamera && !displayPhotobook) &&
+      <header className = "menu">
+        <h1>Photobook</h1>
+        <small>by Emerson Berido</small>
+        <button
+          className = "camera-option"
+          onClick={() => setDisplayCamera(true)}
+        >
+          Take Pictures
+        </button>
+        <button
+          className="photobook-option"
+          onClick={() => setDisplayPhotobook(true)}
+        >
+          Photobook
+        </button>
+      </header>
       }
+
+     {displayCamera && <main className = "black-box">
+        <h2>smile</h2>
+
+        <section className = "polaroid-frame">
+          
+          <Webcam
+            className = {"camera"}
+            ref = {cameraRef}
+            screenshotFormat = "image/png"
+            mirrored = {true}
+            videoConstraints={
+              {
+                width  : 300,
+                height : 300
+              }
+            }
+          />
+        </section>
+
+        {isPictureSatisfactory ? 
+          <button onClick = {() => setIsPictureSatisfactory(false)} className = "retry">
+            redo ?
+          </button> :
+          <button onClick = {capture} className = "snap">
+            snap !
+          </button>
+        }
+
+
+        <form onSubmit = {uploadImage} className = "submit-container">
+          <textarea 
+            placeholder="Enter description here..." 
+            name = "description"
+            className = "description-input"
+            required
+          />
+          <button 
+            type = "submit"
+            className = "submit"
+          >
+            submit ?
+          </button>
+        </form>
+
+      </main>
+      }
+
+      {displayPhotobook &&
+        <Photobook
+          list = {imageList}
+        />
+      }
+
+      {(displayCamera || displayPhotobook) && 
+        <button
+          className = "exit-button"
+          onClick = { () => {
+            setDisplayCamera(false);
+            setDisplayPhotobook(false);
+          }}
+        >
+          WATERMELON
+        </button>
+      }
+
     </main>
+
+    
   )
 }

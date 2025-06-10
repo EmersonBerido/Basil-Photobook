@@ -1,0 +1,93 @@
+.book {
+  background-image: url("./assets/Photobook-finalized.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width : 90%;
+  height : 80vh;
+  display :flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-bottom : 4px solid black;
+  padding-top : 10px;
+
+}
+.book > .pages {
+  display : flex;
+  flex-direction : row;
+  justify-content: space-between;
+  height : 85%;
+}
+
+.leftPage{
+  display : flex;
+  flex-direction: column;
+  width : 50%;
+  padding-top : 5%;
+  gap : 5%;
+}
+
+.rightPage {
+  display : flex;
+  flex-direction: column;
+  width : 50%;
+  padding-top : 5%;
+  gap : 5%;
+}
+
+.entry {
+  display : flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height : 30%;
+
+}
+.entry > .polaroid{
+  display : flex;
+  align-items: flex-start;
+  justify-content: center;
+  border : 3px solid lightgray;
+  width : 135px;
+  height : 165px;
+  width : 25%;
+  height : 140%;
+  background-color: white;
+}
+.entry > .polaroid > .photo {
+  border : 2px solid lightgray;
+  margin-top: 8%;
+  width : 86%;
+  height : auto;
+}
+.entry > .description {
+  text-align: center;
+  width : 50%;
+  font-size : 1.3rem;
+  color : darkslategrey
+}
+
+.button-container {
+  height: 15%;
+  padding-bottom : 20px;
+  padding-left : 2%;
+  padding-right : 2%;
+  display : flex;
+  justify-content: space-between;
+}
+
+.button-container > .prev-page {
+  background-color : transparent;
+  border : none;
+  transform: rotate(180deg);
+}
+.button-container > .next-page {
+  background-color: transparent;
+  border : none;
+}
+.next-page > img, .prev-page > img {
+  height : 100%;
+}
+
+.next-page > img:hover, .prev-page > img:hover {
+  content : url("./src/assets/arrow.png");
+}
+

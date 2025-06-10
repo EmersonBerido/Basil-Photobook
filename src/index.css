@@ -1,4 +1,14 @@
+*{
+  font-family: "handwriting";
+  margin: 0;
+}
 body {
-  background-color : green;
   background-image: url("src/assets/Photobook-background-sky-reduced.png");
+
+
+}
+
+@font-face {
+  font-family: "handwriting";
+  src: url("./assets/OMORI_GAME.ttf");
 }
