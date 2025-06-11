@@ -51,6 +51,7 @@ export default function App() {
     //resets
     setImage(null);
     setIsPictureSatisfactory(false);
+    event.currentTarget.reset();
   }
 
   return (

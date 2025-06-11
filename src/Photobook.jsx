@@ -134,7 +134,7 @@ export default function Photobook(props){
           <div className="zoom-textbox">
             <p className = "zoom-description">{zoomDisplay.description}</p>
             <button className = "text-exit" onClick = {() => setZoomDisplay(null)}>
-              Exit
+              <img src = "src/assets/blue-hand.png"/>
             </button>
           </div>
         </section>
