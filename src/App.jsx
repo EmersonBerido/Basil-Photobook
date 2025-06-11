@@ -28,7 +28,6 @@ export default function App() {
   console.log(imageList)
 
   function uploadImage(event){
-    console.log("in upload image")
     event.preventDefault();
     if (image === null)
     {
@@ -51,7 +50,6 @@ export default function App() {
     //resets
     setImage(null);
     setIsPictureSatisfactory(false);
-    event.currentTarget.reset();
   }
 
   return (

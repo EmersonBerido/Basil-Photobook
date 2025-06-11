@@ -46,6 +46,7 @@ export default function Photobook(props){
     //now the exit button will make the state empty again;maybe have a function that fills in the state
 
     setZoomDisplay(() => {
+      console.log("adding in this entry: "+entry);
       return {
         image : entry.image,
         description : entry.description
@@ -130,6 +131,7 @@ export default function Photobook(props){
 
       {zoomDisplay !== null &&
         <section className = "zoom-container">
+          {console.log("the description is : " +zoomDisplay.description)}
           <img className = "zoom-polaroid" src = {zoomDisplay.image}/>
           <div className="zoom-textbox">
             <p className = "zoom-description">{zoomDisplay.description}</p>
