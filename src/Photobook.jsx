@@ -8,6 +8,7 @@ export default function Photobook(props){
   //buttons to turn pages
   console.log(props.list);
   const [pageNumber, setPageNumber] = useState(0);
+  const [zoomDisplay, setZoomDisplay] = useState(null)
 
   if (props.list.length > 0)
   {
@@ -39,6 +40,22 @@ export default function Photobook(props){
 
   })
 
+  function zoomInPhoto(entry){
+    //prints out large photo with black textbox in the bottom & an exit button at the bottom right of the textbox (in css, blur the background so only the new things are visible)
+    //create a state which checks if it is empty, if so skip. If not, display the information inside it which will have the format below
+    //now the exit button will make the state empty again;maybe have a function that fills in the state
+
+    setZoomDisplay(() => {
+      return {
+        image : entry.image,
+        description : entry.description
+      }
+    })
+    
+    
+  }
+
+
   const startingIndex = Math.abs(pageNumber * 6);
   let entries = [];
   for (let i = startingIndex; i < startingIndex + 6; i++){
@@ -48,10 +65,15 @@ export default function Photobook(props){
     if (i % 2 === 0){
       entries.push(
       <section className = "entry">
-          <div className = "polaroid">
-            <img src = {props.list[i].image} className = "photo"/>
-          </div>
-          <p className = "description">{props.list[i].description}</p>
+          <button
+            onClick = {() => zoomInPhoto(props.list[i])}
+            className = "description-button"
+          >
+            <div className = "polaroid">
+              <img src = {props.list[i].image} className = "photo"/>
+            </div>
+            <img src = "src/assets/journal-entry-1.png" />
+          </button>
         </section>
       );
     }
@@ -59,10 +81,16 @@ export default function Photobook(props){
     {
       entries.push(
         <section className = "entry">
-        <p className = "description">{props.list[i].description}</p>
-        <div className = "polaroid">
-          <img src = {props.list[i].image} className = "photo"/>
-        </div>
+        <button
+            onClick = {() => zoomInPhoto(props.list[i])}
+            className = "description-button"
+          >
+            <img src = "src/assets/journal-entry-2.png" />
+
+            <div className = "polaroid">
+              <img src = {props.list[i].image} className = "photo"/>
+            </div>
+        </button>
       </section>
       );
     }
@@ -99,6 +127,18 @@ export default function Photobook(props){
           {(1 + pageNumber) * 6 < props.list.length && <img src = "src\assets\normal-arrow.png" alt = "next page"/> }
         </button>
       </div>
+
+      {zoomDisplay !== null &&
+        <section className = "zoom-container">
+          <img className = "zoom-polaroid" src = {zoomDisplay.image}/>
+          <div className="zoom-textbox">
+            <p className = "zoom-description">{zoomDisplay.description}</p>
+            <button className = "text-exit" onClick = {() => setZoomDisplay(null)}>
+              Exit
+            </button>
+          </div>
+        </section>
+      }
 
     </section>
   )

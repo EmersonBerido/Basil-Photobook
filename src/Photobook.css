@@ -2,6 +2,7 @@
   background-image: url("./assets/Photobook-finalized.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  filter: brightness(0.95);
   width : 90%;
   height : 80vh;
   display :flex;
@@ -9,8 +10,9 @@
   justify-content: space-around;
   border-bottom : 4px solid black;
   padding-top : 10px;
-
 }
+
+
 .book > .pages {
   display : flex;
   flex-direction : row;
@@ -39,32 +41,43 @@
   align-items: center;
   justify-content: space-evenly;
   height : 30%;
-
 }
-.entry > .polaroid{
+.polaroid{
   display : flex;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   border : 3px solid lightgray;
-  width : 135px;
-  height : 165px;
   width : 25%;
   height : 140%;
-  background-color: white;
+  background-color: gainsboro;
 }
-.entry > .polaroid > .photo {
-  border : 2px solid lightgray;
-  margin-top: 8%;
-  width : 86%;
-  height : auto;
+.polaroid:hover{
+  box-shadow: 0 0 50px 10px black;
 }
-.entry > .description {
+.photo {
+  border : 3px solid lightgray;
+  width : 80%;
+  height : 70%;
+  margin-top : 8%
+}
+.description-button > img {
   text-align: center;
-  width : 50%;
-  font-size : 1.3rem;
-  color : darkslategrey
+  width : 40%;
+  height : 87%;
+  font-size : 1.5rem;
+  color : darkslategrey;
 }
-
+.description-button {
+  background-color: transparent;
+  border : none;
+  color : black;
+  height : 100%;
+  width: 100%;
+  display : flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
 .button-container {
   height: 15%;
   padding-bottom : 20px;
@@ -89,5 +102,51 @@
 
 .next-page > img:hover, .prev-page > img:hover {
   content : url("./src/assets/arrow.png");
+}
+
+.zoom-container {
+  width : 90vw;
+  height : 99vh;
+  border-right: 5px solid pink;
+  border-left: 5px solid pink;
+  position : fixed;
+  display : flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap : 5%;
+}
+.zoom-polaroid{
+  width : 43vmin;
+  height : 45vmin;
+  border : 5px solid gray;
+  padding : 4vmin;
+  padding-bottom : 10vmin;
+  background-color: white;
+  box-shadow: 0 0 50px 30px;
+}
+
+.zoom-textbox {
+  margin-bottom: 0.5%;
+  border : 5px solid green;
+  background-color: black;
+  color : white;
+  width : 95%;
+  height : 25%;
+  font-size : 5vmin;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+
+  
+}
+.zoom-description {
+  width : 99%;
+
+}
+.text-exit {
+  width : 20px;
+  height : 20px;
 }
 

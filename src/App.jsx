@@ -75,32 +75,33 @@ export default function App() {
       }
 
      {displayCamera && <main className = "black-box">
-
-        <section className = "polaroid-frame">
+        <div className = "camera-snap-container">
+          <section className = "polaroid-frame">
           
-          <Webcam
-            className = {"camera"}
-            ref = {cameraRef}
-            screenshotFormat = "image/png"
-            mirrored = {true}
-            videoConstraints={
-              {
-                width  : 300,
-                height : 300
+            <Webcam
+              className = {"camera"}
+              ref = {cameraRef}
+              screenshotFormat = "image/png"
+              mirrored = {true}
+              videoConstraints={
+                {
+                  width  : 300,
+                  height : 300
+                }
               }
-            }
-          />
-        </section>
+            />
+          </section>    
 
-        {isPictureSatisfactory ? 
-          <button onClick = {() => setIsPictureSatisfactory(false)} className = "retry">
-            redo ?
-          </button> :
-          <button onClick = {capture} className = "snap">
-            s n a p !
-          </button>
-        }
-
+          {isPictureSatisfactory ? 
+            <button onClick = {() => setIsPictureSatisfactory(false)} className = "retry">
+              redo ?
+            </button> :
+            <button onClick = {capture} className = "snap">
+              s n a p !
+            </button>
+          }
+        </div>
+        
 
         <form onSubmit = {uploadImage} className = "submit-container">
           <textarea 
@@ -108,6 +109,7 @@ export default function App() {
             name = "description"
             className = "description-input"
             required
+            maxLength={150}
           />
           <button 
             type = "submit"
