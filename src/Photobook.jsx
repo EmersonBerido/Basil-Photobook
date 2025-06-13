@@ -1,6 +1,10 @@
 import "./Photobook.css"
 import {useState} from "react"
 import { useEffect } from "react";
+import TextImage1 from "./assets/journal-entry-1.png";
+import TextImage2 from "./assets/journal-entry-2.png";
+import BlueHand from "./assets/blue-hand.png";
+import Arrow from "./assets/arrow.png"
 
 export default function Photobook(props){
   //only want to display 6 images: 3 per page
@@ -41,10 +45,6 @@ export default function Photobook(props){
   })
 
   function zoomInPhoto(entry){
-    //prints out large photo with black textbox in the bottom & an exit button at the bottom right of the textbox (in css, blur the background so only the new things are visible)
-    //create a state which checks if it is empty, if so skip. If not, display the information inside it which will have the format below
-    //now the exit button will make the state empty again;maybe have a function that fills in the state
-
     setZoomDisplay(() => {
       console.log("adding in this entry: "+entry);
       return {
@@ -73,7 +73,7 @@ export default function Photobook(props){
             <div className = "polaroid">
               <img src = {props.list[i].image} className = "photo"/>
             </div>
-            <img src = "docs/assets/journal-entry-1.png" />
+            <img src = {TextImage1} />
           </button>
         </section>
       );
@@ -86,7 +86,7 @@ export default function Photobook(props){
             onClick = {() => zoomInPhoto(props.list[i])}
             className = "description-button"
           >
-            <img src = "docs/assets/journal-entry-2.png" />
+            <img src = {TextImage2} />
 
             <div className = "polaroid">
               <img src = {props.list[i].image} className = "photo"/>
@@ -118,14 +118,14 @@ export default function Photobook(props){
           onClick = {() => setPageNumber(prev => prev - 1)}
           className = "prev-page"
         >
-          {pageNumber !== 0 && <img src = "docs/assets/normal-arrow.png" alt = "prev page"/>}
+          {pageNumber !== 0 && <img src = {Arrow} alt = "prev page"/>}
         </button>
 
         <button 
           onClick = {() => setPageNumber(prev => prev + 1)}
           className = "next-page"
         >
-          {(1 + pageNumber) * 6 < props.list.length && <img src = "docs/assets/normal-arrow.png" alt = "next page"/> }
+          {(1 + pageNumber) * 6 < props.list.length && <img src = {Arrow} alt = "next page"/> }
         </button>
       </div>
 
@@ -136,7 +136,7 @@ export default function Photobook(props){
           <div className="zoom-textbox">
             <p className = "zoom-description">{zoomDisplay.description}</p>
             <button className = "text-exit" onClick = {() => setZoomDisplay(null)}>
-              <img src = "src/assets/blue-hand.png"/>
+              <img src = {BlueHand}/>
             </button>
           </div>
         </section>

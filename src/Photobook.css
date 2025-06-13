@@ -101,7 +101,7 @@
 }
 
 .next-page > img:hover, .prev-page > img:hover {
-  content : url("public/arrow.png");
+  content : url("./assets/arrow.png");
 }
 
 .zoom-container {
