@@ -73,7 +73,7 @@ export default function Photobook(props){
             <div className = "polaroid">
               <img src = {props.list[i].image} className = "photo"/>
             </div>
-            <img src = "src/assets/journal-entry-1.png" />
+            <img src = "docs/assets/journal-entry-1.png" />
           </button>
         </section>
       );
@@ -86,7 +86,7 @@ export default function Photobook(props){
             onClick = {() => zoomInPhoto(props.list[i])}
             className = "description-button"
           >
-            <img src = "src/assets/journal-entry-2.png" />
+            <img src = "docs/assets/journal-entry-2.png" />
 
             <div className = "polaroid">
               <img src = {props.list[i].image} className = "photo"/>
@@ -118,14 +118,14 @@ export default function Photobook(props){
           onClick = {() => setPageNumber(prev => prev - 1)}
           className = "prev-page"
         >
-          {pageNumber !== 0 && <img src = "src\assets\normal-arrow.png" alt = "prev page"/>}
+          {pageNumber !== 0 && <img src = "docs/assets/normal-arrow.png" alt = "prev page"/>}
         </button>
 
         <button 
           onClick = {() => setPageNumber(prev => prev + 1)}
           className = "next-page"
         >
-          {(1 + pageNumber) * 6 < props.list.length && <img src = "src\assets\normal-arrow.png" alt = "next page"/> }
+          {(1 + pageNumber) * 6 < props.list.length && <img src = "docs/assets/normal-arrow.png" alt = "next page"/> }
         </button>
       </div>
 
