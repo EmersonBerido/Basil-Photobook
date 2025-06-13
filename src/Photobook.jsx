@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import TextImage1 from "./assets/journal-entry-1.png";
 import TextImage2 from "./assets/journal-entry-2.png";
 import BlueHand from "./assets/blue-hand.png";
-import Arrow from "./assets/arrow.png"
+import Arrow from "./assets/normal-arrow.png"
 
 export default function Photobook(props){
   //only want to display 6 images: 3 per page
