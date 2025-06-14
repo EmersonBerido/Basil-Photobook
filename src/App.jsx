@@ -77,7 +77,8 @@ export default function App() {
         <div className = "camera-snap-container">
           <section className = "polaroid-frame">
           
-            <Webcam
+            {image === null ? 
+              <Webcam
               className = {"camera"}
               ref = {cameraRef}
               screenshotFormat = "image/png"
@@ -87,12 +88,19 @@ export default function App() {
                   width  : 300,
                   height : 300
                 }
-              }
-            />
+              }/> :
+              <img src = {image} className = "camera"/>
+            }
+
           </section>    
 
           {isPictureSatisfactory ? 
-            <button onClick = {() => setIsPictureSatisfactory(false)} className = "retry">
+            <button onClick = {() => {
+              setIsPictureSatisfactory(false);
+              setImage(null)
+            }} 
+              className = "retry"
+            >
               redo ?
             </button> :
             <button onClick = {capture} className = "snap">
