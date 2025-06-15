@@ -153,3 +153,19 @@
   font-weight: bold;
   border: 5px solid white;
 }
+.clear-photos-button {
+  position : fixed;
+  left : 0;
+  bottom : 0;
+  width : 5vmax;
+  height: auto;
+  background-color: transparent;
+  border : none;
+}
+.reset-cat {
+  background-color: transparent;
+  border : none;
+  height : 100%;
+  width : 100%;
+
+}

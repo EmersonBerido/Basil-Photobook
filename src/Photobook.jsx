@@ -6,44 +6,21 @@ import TextImage2 from "./assets/journal-entry-2.png";
 import BlueHand from "./assets/blue-hand.png";
 import Arrow from "./assets/normal-arrow.png"
 
-export default function Photobook(props){
-  //only want to display 6 images: 3 per page
-  //should have a state for page number
-  //buttons to turn pages
-  console.log(props.list);
+export default function Photobook(){
   const [pageNumber, setPageNumber] = useState(0);
-  const [zoomDisplay, setZoomDisplay] = useState(null)
-
-  if (props.list.length > 0)
-  {
-    console.log("Now there are atleast 1 object in photobook")
-  }
+  const [zoomDisplay, setZoomDisplay] = useState(null);
 
   //checks if pageNumber is less than 0
   useEffect(() => {
-    console.log("Before: Page " + pageNumber);
     if (pageNumber < 0)
     {
       setPageNumber(0);
-        console.log("After: Page " + pageNumber)
-
     }
 
 
   }, [pageNumber])
 
-  //create whole array of images
-  const images = props.list.map((obj, index) => {
-    return (
-      <section className = "entry" key = {index}>
-        <img src = {obj.image}/>
-        <p>{obj.description}</p>
-      </section>
-
-    )
-
-  })
-
+  //creates a new layer to show an enlarged version of the image and text
   function zoomInPhoto(entry){
     setZoomDisplay(() => {
       console.log("adding in this entry: "+entry);
@@ -56,22 +33,25 @@ export default function Photobook(props){
     
   }
 
-
+  //creates visible entries for photobook
   const startingIndex = Math.abs(pageNumber * 6);
   let entries = [];
   for (let i = startingIndex; i < startingIndex + 6; i++){
-    if (i >= props.list.length){
+    if (i >= localStorage.length){
       break;
     }
     if (i % 2 === 0){
+
+
+      //localstorage version
       entries.push(
       <section className = "entry">
           <button
-            onClick = {() => zoomInPhoto(props.list[i])}
+            onClick = {() => zoomInPhoto(JSON.parse(localStorage.getItem(i)))}
             className = "description-button"
           >
             <div className = "polaroid">
-              <img src = {props.list[i].image} className = "photo"/>
+              <img src = {JSON.parse(localStorage.getItem(i)).image} className = "photo"/>
             </div>
             <img src = {TextImage1} />
           </button>
@@ -83,13 +63,13 @@ export default function Photobook(props){
       entries.push(
         <section className = "entry">
         <button
-            onClick = {() => zoomInPhoto(props.list[i])}
+            onClick = {() => zoomInPhoto(JSON.parse(localStorage.getItem(i)))}
             className = "description-button"
           >
             <img src = {TextImage2} />
 
             <div className = "polaroid">
-              <img src = {props.list[i].image} className = "photo"/>
+              <img src = {JSON.parse(localStorage.getItem(i)).image} className = "photo"/>
             </div>
         </button>
       </section>
@@ -99,7 +79,6 @@ export default function Photobook(props){
 
   const leftPage = entries.slice(0,3);
   const rightPage = entries.slice(3);
-
 
   return(
     <section className = "book">
@@ -125,13 +104,12 @@ export default function Photobook(props){
           onClick = {() => setPageNumber(prev => prev + 1)}
           className = "next-page"
         >
-          {(1 + pageNumber) * 6 < props.list.length && <img src = {Arrow} alt = "next page"/> }
+          {(1 + pageNumber) * 6 < localStorage.length && <img src = {Arrow} alt = "next page"/> }
         </button>
       </div>
 
       {zoomDisplay !== null &&
         <section className = "zoom-container">
-          {console.log("the description is : " +zoomDisplay.description)}
           <img className = "zoom-polaroid" src = {zoomDisplay.image}/>
           <div className="zoom-textbox">
             <p className = "zoom-description">{zoomDisplay.description}</p>
@@ -141,6 +119,7 @@ export default function Photobook(props){
           </div>
         </section>
       }
+
 
     </section>
   )

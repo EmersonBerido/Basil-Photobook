@@ -5,6 +5,7 @@ import {useEffect} from "react"
 import './Photoshoot.css'
 import Webcam from "react-webcam";
 import Photobook from "./Photobook";
+import cat from "./assets/meow.png";
 
 //Components
 
@@ -12,44 +13,48 @@ export default function App() {
   const cameraRef = useRef(null);
   const [image, setImage] = useState(null);
   const [isPictureSatisfactory, setIsPictureSatisfactory] = useState(false);
-  const [imageList, setImageList] = useState([])
   const [displayCamera, setDisplayCamera] = useState(false);
   const [displayPhotobook, setDisplayPhotobook] = useState(false)
+  const [localStorageIndex, setLocalStorageIndex] = useState(localStorage.length);
 
   const capture = () => {
-    console.log("reached capture before crashing")
     const imageSrc = cameraRef.current.getScreenshot();
     setImage(imageSrc);
     setIsPictureSatisfactory(true);
   };
 
-
-  console.log(`There are currently ${imageList.length} in the list`);
-  console.log(imageList)
-
   function uploadImage(event){
+    //prevents page from refreshing
     event.preventDefault();
+
+    //checks if user snapped a picture first
     if (image === null)
     {
-      //maybe add a message to the user to take a picture first
-      console.log("image is not added in, returning...")
       return;
     }
 
-    setImageList(prev => {
-      return (
-        [...prev,
-          {
-            image : image,
-            description : event.target.description.value
-          }
-        ]
-      )
-    })
+    //adds entry into local storage
+    try {
+      localStorage.setItem(localStorageIndex, JSON.stringify({
+        image : image,
+        description : event.target.description.value
+      }))
+      setLocalStorageIndex(prev => prev + 1 );
+      
+    } catch (error) {
+      alert("There is no more available storage for entries. If you wish to save more, you'll need to delete all entries by clicking the cat on the bottom left corner");
+    }
 
-    //resets
+    //resets states
     setImage(null);
     setIsPictureSatisfactory(false);
+
+  }
+
+  function EraseAllEntries() {
+    localStorage.clear();
+    setLocalStorageIndex(0);
+    alert("Cleared all entries in photobook :3")
   }
 
   return (
@@ -116,7 +121,7 @@ export default function App() {
             name = "description"
             className = "description-input"
             required
-            maxLength={150}
+            maxLength={200}
           />
           <button 
             type = "submit"
@@ -130,9 +135,7 @@ export default function App() {
       }
 
       {displayPhotobook &&
-        <Photobook
-          list = {imageList}
-        />
+        <Photobook/>
       }
 
       {(displayCamera || displayPhotobook) && 
@@ -146,6 +149,10 @@ export default function App() {
           X
         </button>
       }
+
+      <button onClick = {EraseAllEntries} className = "clear-photos-button">
+        <img src = {cat} className = "reset-cat"/>
+      </button>
 
     </main>
 
