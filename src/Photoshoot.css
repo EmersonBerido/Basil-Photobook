@@ -157,10 +157,27 @@
   position : fixed;
   left : 0;
   bottom : 0;
-  width : 5vmax;
+  width : 8vmax;
   height: auto;
   background-color: transparent;
   border : none;
+}
+.clear-photos-button .clear-photos-prompt{
+  visibility: hidden;
+}
+.clear-photos-button:hover .clear-photos-prompt{
+  visibility: visible;
+}
+.clear-photos-prompt {
+  position: relative;
+  bottom : 10px;
+  color : white;
+  background-color: black;
+  border : 2px solid white;
+  font-size: 3vmax;
+  width : 100%;
+  height: auto;
+  padding : 5%;
 }
 .reset-cat {
   background-color: transparent;

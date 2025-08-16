@@ -151,6 +151,7 @@ export default function App() {
       }
 
       <button onClick = {EraseAllEntries} className = "clear-photos-button">
+        <span className = "clear-photos-prompt">Reset?</span>
         <img src = {cat} className = "reset-cat"/>
       </button>
 
