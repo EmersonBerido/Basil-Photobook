@@ -1,1 +1,36 @@
-console.log("THIS SERVER IS WORKING. PLEASE STOP GIVING ME AN ERROR")
+import express from "express";
+import cors from "cors";
+
+import { getAllData, postData } from "./db/entries.js";
+
+
+const PORT = 8000;
+const server = express();
+
+
+
+// const newEntry = {
+//   name : "Emerson",
+//   photo : "fakephotourl.com",
+//   characterSelection : "fakeCharacter",
+//   description : "this is a description"
+// }
+// await postData(newEntry)
+
+// const test = await getAllData();
+// console.log(test)
+
+//const entry = new entries({caption : "Hello, this is a caption"});
+//await entry.save();
+
+//CORS; only github is able to use it, and it only allows user to retrieve and send data
+server.use(cors({
+  origin : "https://emersonberido.github.io/Basil-Photobook/",
+  methods : ["GET", "POST"]
+}))
+
+server.get('/entries', (req, res) => {
+  console.log("successfully in get")
+})
+
+server.listen(PORT, () => console.log("this server is working :)"))
