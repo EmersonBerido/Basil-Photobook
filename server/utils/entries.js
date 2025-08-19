@@ -7,9 +7,21 @@ dotenv.config();
 
 export async function connectDB()
 {
+  if (mongoose.connection.readyState === 1) {
+    console.log("already connected to mongo");
+    return;
+  }
+  else if (mongoose.connection.readyState === 2){
+    console.log("currently connecting to mongo")
+    mongoose.connection.once("connected", () => {
+      console.log("Connection is now finished processing")
+    })
+  }
+
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("mongoose is now connected");
+    console.log("mongoose status:", mongoose.connection.readyState)
   }
   catch (err) {
     console.log("Mongoose couldn't connect", err)
