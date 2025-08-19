@@ -16,7 +16,7 @@ async function connectDB()
   }
 }
 
-connectDB();
+await connectDB();
 
 export async function getAllData(){
   if (mongoose.connection.readyState === 1) {
