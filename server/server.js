@@ -11,11 +11,15 @@ const server = express();
 server.use(cors())
 //add limits later
 
+// const test = await getAllData();
+// console.log(test);
+
 server.use(express.json())
 
 server.get('/entries', async (req, res) => {
   console.log("successfully in get");
-  const data = await getAllData()
+  const data = await getAllData();
+  console.log("in get (after getting data)")
   res.json(data);
 })
 

@@ -14,6 +14,13 @@ catch (err) {
 }
 
 export async function getAllData(){
+  if (mongoose.connection.readyState === 1) {
+    console.log("mongoose is successfully connected in get")
+  }
+  else {
+    console.error("Mongoose couldn't connect in get")
+  }
+
   //creates empty array as default
   let data = [];
 
