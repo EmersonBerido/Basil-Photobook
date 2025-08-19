@@ -21,7 +21,7 @@ export async function getAllData(){
     console.log("mongoose is successfully connected in get")
   }
   else {
-    console.log("Mongoose couldn't connect in get:", mongoose.connect.readyState, "Now connecting...")
+    console.log("Mongoose couldn't connect in get:", mongoose.connection.readyState, "Now connecting...")
     await connectDB();
   }
 

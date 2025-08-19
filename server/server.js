@@ -11,12 +11,13 @@ const server = express();
 server.use(cors())
 //add limits later
 
-const test = await getAllData();
-console.log(test);
+await connectDB();
+
+// const test = await getAllData();
+// console.log(test);
 
 server.use(express.json())
 
-await connectDB();
 
 server.get('/entries', async (req, res) => {
   console.log("successfully in get");
