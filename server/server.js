@@ -24,10 +24,8 @@ const server = express();
 //await entry.save();
 
 //CORS; only github is able to use it, and it only allows user to retrieve and send data
-server.use(cors({
-  origin : "https://emersonberido.github.io/Basil-Photobook/",
-  methods : ["GET", "POST"]
-}))
+server.use(cors())
+//add limits later
 
 server.use(express.json())
 
