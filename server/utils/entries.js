@@ -1,6 +1,6 @@
 //Goal of this file: util functions to receive all data and post a single entry
 
-import { entryModel } from "../models/entryModel";
+import { entryModel } from "../models/entryModel.js";
 
 export async function getAllData(){
   //creates empty array as default
