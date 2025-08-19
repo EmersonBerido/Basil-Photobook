@@ -5,20 +5,26 @@ import mongoose from "mongoose"
 import dotenv from "dotenv";
 dotenv.config();
 
-try {
-  await mongoose.connect(process.env.MONGO_URI);
-  console.log("mongoose is now connected");
+async function connectDB()
+{
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("mongoose is now connected");
+  }
+  catch (err) {
+    console.log("Mongoose couldn't connect", err)
+  }
 }
-catch (err) {
-  console.error("Mongoose couldn't connect", err)
-}
+
+connectDB();
 
 export async function getAllData(){
   if (mongoose.connection.readyState === 1) {
     console.log("mongoose is successfully connected in get")
   }
   else {
-    console.error("Mongoose couldn't connect in get")
+    connectDB();
+    console.error("Mongoose couldn't connect in get:", mongoose.connect.readyState)
   }
 
   //creates empty array as default
