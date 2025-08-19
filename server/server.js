@@ -6,7 +6,6 @@ import { getAllData, postData } from "./utils/entries.js";
 
 const PORT = 8000;
 const server = express();
-connectToDB();
 
 //CORS; only github is able to use it, and it only allows user to retrieve and send data
 server.use(cors())
