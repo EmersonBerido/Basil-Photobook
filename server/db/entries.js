@@ -40,11 +40,11 @@ export async function getAllData(){
     data = await entryModel.find().sort({_id : -1});
   } 
   catch (err) {
-    console.log("Unable to find entries")
+    console.log("Unable to find entries", err)
   } 
   finally {
     //closes connection to database
-    mongoose.connection.close();
+    await mongoose.connection.close();
   }
   
   return data;
