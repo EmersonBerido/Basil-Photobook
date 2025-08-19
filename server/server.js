@@ -1,10 +1,8 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv"
-dotenv.config()
+
 
 import { getAllData, postData } from "./utils/entries.js";
-import { connectToDB } from "./db/db.js";
 
 const PORT = 8000;
 const server = express();

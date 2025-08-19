@@ -1,6 +1,17 @@
 //Goal of this file: util functions to receive all data and post a single entry
 
 import { entryModel } from "../models/entryModel.js";
+import mongoose from "mongoose"
+import dotenv from "dotenv";
+dotenv.config();
+
+try {
+  await mongoose.connect(process.env.MONGO_URI);
+  console.log("mongoose is now connected");
+}
+catch (err) {
+  console.error("Mongoose couldn't connect", err)
+}
 
 export async function getAllData(){
   //creates empty array as default
