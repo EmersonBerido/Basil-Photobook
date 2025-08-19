@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 
 
-import { getAllData, postData } from "./utils/entries.js";
+import { getAllData, postData, connectDB } from "./utils/entries.js";
 
 const PORT = 8000;
 const server = express();
@@ -11,10 +11,12 @@ const server = express();
 server.use(cors())
 //add limits later
 
-// const test = await getAllData();
-// console.log(test);
+const test = await getAllData();
+console.log(test);
 
 server.use(express.json())
+
+await connectDB();
 
 server.get('/entries', async (req, res) => {
   console.log("successfully in get");
