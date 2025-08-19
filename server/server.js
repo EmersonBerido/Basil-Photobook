@@ -29,8 +29,25 @@ server.use(cors({
   methods : ["GET", "POST"]
 }))
 
-server.get('/entries', (req, res) => {
-  console.log("successfully in get")
+server.use(express.json())
+
+server.get('/entries', async (req, res) => {
+  console.log("successfully in get");
+  const data = await getAllData()
+  res.json(data);
+})
+
+server.post('/entries', async (req, res) => {
+  console.log("successfully in post")
+  
+  const newEntry = {
+    name : req.body.name,
+    photo : req.body.photo,
+    characterSelection : req.body.characterSelection,
+    description : req.body.description
+  }
+
+  await postData(newEntry);
 })
 
 server.listen(PORT, () => console.log("this server is working :)"))

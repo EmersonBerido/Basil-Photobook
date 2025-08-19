@@ -10,6 +10,11 @@ import cat from "./assets/meow.png";
 //Components
 
 export default function App() {
+  fetch("https://basil-photobook.onrender.com/entries")
+    .then(res => res.json())
+    .then(message => console.log(message))
+    .catch(err => console.error("Unable to connect to backend"))
+
   const cameraRef = useRef(null);
   const [image, setImage] = useState(null);
   const [isPictureSatisfactory, setIsPictureSatisfactory] = useState(false);

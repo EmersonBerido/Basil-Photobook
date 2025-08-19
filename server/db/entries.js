@@ -36,8 +36,8 @@ export async function getAllData(){
   try {
     //opens connection to mongoDB
     await mongoose.connect(process.env.MONGO_URI);
-    //gets all the data
-    data = await entryModel.find();
+    //gets all the data with newest being first
+    data = await entryModel.find().sort({_id : -1});
   } 
   catch (err) {
     console.log("Unable to find entries")
