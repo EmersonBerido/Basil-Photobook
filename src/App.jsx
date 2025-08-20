@@ -6,15 +6,19 @@ import './Photoshoot.css'
 import Webcam from "react-webcam";
 import Photobook from "./Photobook";
 import cat from "./assets/meow.png";
+import { imageToURL } from "./utils/cloudUtil.js";
 
 //Components
 
 export default function App() {
+
   useEffect(() => {
+    //connect to database
     fetch("https://basil-photobook.onrender.com/entries")
       .then(res => res.json())
       .then(message => console.log(message))
       .catch(err => console.error("Unable to connect to backend", err))
+
 
   }, [])
 
@@ -52,6 +56,27 @@ export default function App() {
     } catch (error) {
       alert("There is no more available storage for entries. If you wish to save more, you'll need to delete all entries by clicking the cat on the bottom left corner");
     }
+
+    //convert image via cloudinary
+    imageToURL(image);
+    
+
+    // --WORKS; needs to change values of body --
+    // fetch("https://basil-photobook.onrender.com/entries", {
+    //   method : "POST",
+    //   headers : {
+    //     "Content-Type" : "application/json"
+    //   },
+    //   body : JSON.stringify({
+    //     name : "Emerson",
+    //     photo : "https://helpdesk.tinyurl.com/faqs/tinyurl-profile-picture",
+    //     characterSelection : "TestCharacterSelection.png",
+    //     description : event.target.description.value
+    //   })
+    // }) //doesn't happen
+    //   .then(resp => {
+    //     resp.ok ? console.log("Submission worked") : console.log("Submission failed")
+    //   })
 
     //resets states
     setImage(null);
