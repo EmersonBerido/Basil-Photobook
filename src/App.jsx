@@ -6,19 +6,20 @@ import './Photoshoot.css'
 import Webcam from "react-webcam";
 import Photobook from "./Photobook";
 import cat from "./assets/meow.png";
+
+//utils
 import { imageToURL } from "./utils/cloudUtil.js";
+import { getDatabaseEntries } from "./utils/backendUtils.js";
 
 //Components
 
 export default function App() {
 
   useEffect(() => {
-    //connect to database
-    fetch("https://basil-photobook.onrender.com/entries")
-      .then(res => res.json())
-      .then(message => console.log(message))
-      .catch(err => console.error("Unable to connect to backend", err))
-
+    (async () => {
+      const data = await getDatabaseEntries();
+      console.log("data from backend", data);
+    })()
 
   }, [])
 
