@@ -8,8 +8,7 @@ import Photobook from "./Photobook";
 import cat from "./assets/meow.png";
 
 //utils
-import { imageToURL } from "./utils/cloudUtil.js";
-import { getDatabaseEntries } from "./utils/backendUtils.js";
+import { getDatabaseEntries, uploadToDatabase } from "./utils/backendUtils.js";
 
 //Components
 
@@ -47,10 +46,11 @@ export default function App() {
     }
 
     //adds entry into local storage
+    const description = event.target.description.value;
     try {
       localStorage.setItem(localStorageIndex, JSON.stringify({
         image : image,
-        description : event.target.description.value
+        description : description
       }))
       setLocalStorageIndex(prev => prev + 1 );
       
@@ -59,25 +59,15 @@ export default function App() {
     }
 
     //convert image via cloudinary
-    imageToURL(image);
+    //imageToURL(image);
     
-
-    // --WORKS; needs to change values of body --
-    // fetch("https://basil-photobook.onrender.com/entries", {
-    //   method : "POST",
-    //   headers : {
-    //     "Content-Type" : "application/json"
-    //   },
-    //   body : JSON.stringify({
-    //     name : "Emerson",
-    //     photo : "https://helpdesk.tinyurl.com/faqs/tinyurl-profile-picture",
-    //     characterSelection : "TestCharacterSelection.png",
-    //     description : event.target.description.value
-    //   })
-    // }) //doesn't happen
-    //   .then(resp => {
-    //     resp.ok ? console.log("Submission worked") : console.log("Submission failed")
-    //   })
+    //follow this format if user wants to upload to database
+    // (async () => {await uploadToDatabase(
+    //   "Emerson",
+    //   image,
+    //   "Boy1 for Default Testing",
+    //   description
+    // )})();
 
     //resets states
     setImage(null);
