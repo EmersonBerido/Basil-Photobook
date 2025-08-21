@@ -15,6 +15,7 @@ export async function imageToURL(image)
     body : formEntry
   })
   const newUrl = (await testCloud.json()).url;
+  console.log("this is new url", newUrl);
   return newUrl;
 
 }

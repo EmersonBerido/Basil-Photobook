@@ -5,10 +5,14 @@ import {useEffect} from "react"
 import './Photoshoot.css'
 import Webcam from "react-webcam";
 import Photobook from "./Photobook";
+import TakePhoto from "./TakePhoto.jsx";
 import cat from "./assets/meow.png";
+import characters from "./assets/Selections/characters.js";
+
+import GlobalSubmission from "./GlobalSubmission.jsx";
 
 //utils
-import { getDatabaseEntries, uploadToDatabase } from "./utils/backendUtils.js";
+import { getDatabaseEntries } from "./utils/backendUtils.js";
 
 //Components
 
@@ -22,58 +26,14 @@ export default function App() {
 
   }, [])
 
-  const cameraRef = useRef(null);
-  const [image, setImage] = useState(null);
-  const [isPictureSatisfactory, setIsPictureSatisfactory] = useState(false);
   const [displayCamera, setDisplayCamera] = useState(false);
   const [displayPhotobook, setDisplayPhotobook] = useState(false)
   const [localStorageIndex, setLocalStorageIndex] = useState(localStorage.length);
 
-  const capture = () => {
-    const imageSrc = cameraRef.current.getScreenshot();
-    setImage(imageSrc);
-    setIsPictureSatisfactory(true);
-  };
-
-  function uploadImage(event){
-    //prevents page from refreshing
-    event.preventDefault();
-
-    //checks if user snapped a picture first
-    if (image === null)
-    {
-      return;
-    }
-
-    //adds entry into local storage
-    const description = event.target.description.value;
-    try {
-      localStorage.setItem(localStorageIndex, JSON.stringify({
-        image : image,
-        description : description
-      }))
-      setLocalStorageIndex(prev => prev + 1 );
-      
-    } catch (error) {
-      alert("There is no more available storage for entries. If you wish to save more, you'll need to delete all entries by clicking the cat on the bottom left corner");
-    }
-
-    //convert image via cloudinary
-    //imageToURL(image);
-    
-    //follow this format if user wants to upload to database
-    // (async () => {await uploadToDatabase(
-    //   "Emerson",
-    //   image,
-    //   "Boy1 for Default Testing",
-    //   description
-    // )})();
-
-    //resets states
-    setImage(null);
-    setIsPictureSatisfactory(false);
-
-  }
+  //REMOVE LATER
+  const [showGlobalSub, setShowGlobalSub] = useState(false);
+  const [globalSubmissionInfo, setGlobalSubmissionInfo] = useState(null)
+  
 
   function EraseAllEntries() {
     localStorage.clear();
@@ -102,61 +62,12 @@ export default function App() {
       </header>
       }
 
-     {displayCamera && <main className = "black-box">
-        <div className = "camera-snap-container">
-          <section className = "polaroid-frame">
-          
-            {image === null ? 
-              <Webcam
-              className = {"camera"}
-              ref = {cameraRef}
-              screenshotFormat = "image/png"
-              mirrored = {true}
-              videoConstraints={
-                {
-                  width  : 300,
-                  height : 300
-                }
-              }/> :
-              <img src = {image} className = "camera"/>
-            }
-
-          </section>    
-
-          {isPictureSatisfactory ? 
-            <button onClick = {() => {
-              setIsPictureSatisfactory(false);
-              setImage(null)
-            }} 
-              className = "retry"
-            >
-              redo ?
-            </button> :
-            <button onClick = {capture} className = "snap">
-              s n a p !
-            </button>
-          }
-        </div>
-        
-
-        <form onSubmit = {uploadImage} className = "submit-container">
-          <textarea 
-            placeholder="Enter description here..." 
-            name = "description"
-            className = "description-input"
-            required
-            maxLength={200}
-          />
-          <button 
-            type = "submit"
-            className = "submit"
-          >
-            s u b m i t ?
-          </button>
-        </form>
-
-      </main>
+      {displayCamera && 
+        <TakePhoto
+          setDisplayCamera = {setDisplayCamera}
+        />
       }
+
 
       {displayPhotobook &&
         <Photobook/>
