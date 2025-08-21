@@ -6,6 +6,7 @@ import './Photoshoot.css'
 import Webcam from "react-webcam";
 import Photobook from "./Photobook";
 import TakePhoto from "./TakePhoto.jsx";
+import GlobalPhotobook from "./GlobalPhotobook.jsx";
 import cat from "./assets/meow.png";
 import characters from "./assets/Selections/characters.js";
 
@@ -29,11 +30,8 @@ export default function App() {
   const [displayCamera, setDisplayCamera] = useState(false);
   const [displayPhotobook, setDisplayPhotobook] = useState(false)
   const [localStorageIndex, setLocalStorageIndex] = useState(localStorage.length);
+  const [displayGPhotobook, setDisplayGPhotobook] = useState(false);
 
-  //REMOVE LATER
-  const [showGlobalSub, setShowGlobalSub] = useState(false);
-  const [globalSubmissionInfo, setGlobalSubmissionInfo] = useState(null)
-  
 
   function EraseAllEntries() {
     localStorage.clear();
@@ -59,6 +57,9 @@ export default function App() {
         >
           Photobook
         </button>
+        <button onClick={() => setDisplayGPhotobook(true)}>
+          Global
+        </button>
       </header>
       }
 
@@ -71,6 +72,9 @@ export default function App() {
 
       {displayPhotobook &&
         <Photobook/>
+      }
+
+      {displayGPhotobook && <GlobalPhotobook/>
       }
 
       {(displayCamera || displayPhotobook) && 

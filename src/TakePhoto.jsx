@@ -13,6 +13,8 @@ export default function TakePhoto(props){
   const [displayGS, setDisplayGS] = useState(false);
   const [globalSubmissionInfo, setGlobalSubmissionInfo] = useState(null)
 
+  console.log("displayGS", displayGS)
+
   const capture = () => {
     const imageSrc = cameraRef.current.getScreenshot();
     setImage(imageSrc);

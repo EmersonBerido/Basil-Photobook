@@ -69,4 +69,50 @@ export async function postData(entry){
 
 }
 
+export async function dataLength(){
+  if (mongoose.connection.readyState === 1) {
+    console.log("mongoose is successfully connected, now getting length")
+  }
+  else {
+    console.log("Mongoose couldn't connect in get:", mongoose.connection.readyState, "Now connecting...")
+    await connectDB();
+  }
+
+  const length = await entryModel.countDocuments();
+  return length;
+}
+
+export async function GetDataViaIndex(start, end)
+{
+  if (mongoose.connection.readyState === 1) {
+    console.log("mongoose is successfully connected")
+  }
+  else {
+    console.log("Mongoose couldn't connect", mongoose.connection.readyState, "Now connecting...")
+    await connectDB();
+  }
+
+  let data = [];
+
+  try {
+    const amount = end - start;
+
+    if (amount <= 0) {
+      console.error("Start index must be less than end index");
+      return data;
+    }
+    
+    //gets data starting from start index, and fills it with amount of entries
+    data = await entryModel.find()
+      .sort({_id : -1})
+      .skip(start)
+      .limit(amount);
+  }
+  catch (err) {
+    console.error("error collecting data", err);
+  }
+
+  return data;
+}
+
 
