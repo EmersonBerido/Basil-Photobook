@@ -26,28 +26,34 @@ server.use(express.json())
 
 server.get('/entries', async (req, res) => {
   //add an if else for whether or not there are query params; pageNum=#
+  //assumes pagenum starts at 1
   const pageNum = req.query.pageNum;
 
   //returns 6 entries per page
-  if (pageNum){
+  if (pageNum && pageNum > 0){
     const startIndex = (pageNum - 1) * 6;
-    let entryCount = startIndex + 6;
+    let endIndex = startIndex + 6;
 
+    //checks if endIndex is greater than length of data
     const dataLength = await dataLength();
-    if (entryCount > dataLength) {
-      entryCount = dataLength;
+    if (endIndex > dataLength) {
+      endIndex = dataLength;
     }
 
+    //Gets data
+    const data = await GetDataViaIndex(startIndex, endIndex);
+    res.json(data);
 
-    
-    
+  }
+  else {
+    //returns all entries
+    console.log("successfully in get");
+    const data = await getAllData();
+    console.log("in get (after getting data)")
+    res.json(data);
+
   }
 
-  //returns all entries
-  console.log("successfully in get");
-  const data = await getAllData();
-  console.log("in get (after getting data)")
-  res.json(data);
 })
 
 server.post('/entries', async (req, res) => {

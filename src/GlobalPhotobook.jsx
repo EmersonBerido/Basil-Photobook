@@ -26,8 +26,5 @@ export default function GlobalPhotobook(){
     }
 
   }, [pageNumber])
-  return (
-    <h1>hello</h1>
-  )
   
 }
