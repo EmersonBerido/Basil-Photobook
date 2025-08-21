@@ -35,9 +35,9 @@ server.get('/entries', async (req, res) => {
     let endIndex = startIndex + 6;
 
     //checks if endIndex is greater than length of data
-    const dataLength = await dataLength();
-    if (endIndex > dataLength) {
-      endIndex = dataLength;
+    const length = await dataLength();
+    if (endIndex > length) {
+      endIndex = length;
     }
 
     //Gets data
