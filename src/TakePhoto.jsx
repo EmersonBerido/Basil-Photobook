@@ -2,6 +2,7 @@ import {useState, useRef} from "react";
 import Webcam from "react-webcam";
 import GlobalSubmission from "./GlobalSubmission";
 import "./TakePhoto.css"
+import Cat from "./assets/meow.png"
 
 export default function TakePhoto(props){
   const cameraRef = useRef(null);
@@ -127,8 +128,11 @@ export default function TakePhoto(props){
 
       {displayGSPrompt &&
         <section className="gs-prompt-container">
-          <h1>Would You like to submit to the shared photobook?</h1>
-          <small>Note: This action can't be reversed...</small>
+          <div className="gs-text-container">
+            <h1>Would You like to submit to the shared photobook?</h1>
+            <small>This action can't be reversed...</small> 
+          </div>
+          <img src={Cat}/>
           <div className="gs-buttons-container">
             <button 
             onClick={
