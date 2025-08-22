@@ -15,6 +15,7 @@ import GlobalSubmission from "./GlobalSubmission.jsx";
 //utils
 import { getDatabaseEntries } from "./utils/backendUtils.js";
 
+
 //Components
 
 export default function App() {
@@ -42,7 +43,7 @@ export default function App() {
   return (
     <main className = "program">
       
-      {(!displayCamera && !displayPhotobook) &&
+      {(!displayCamera && !displayPhotobook && !displayGPhotobook) &&
       <header className = "menu">
         <h1>Photobook</h1>
         <button
@@ -77,12 +78,13 @@ export default function App() {
       {displayGPhotobook && <GlobalPhotobook/>
       }
 
-      {(displayCamera || displayPhotobook) && 
+      {(displayCamera || displayPhotobook || displayGPhotobook) && 
         <button
           className = "exit-button"
           onClick = { () => {
             setDisplayCamera(false);
             setDisplayPhotobook(false);
+            setDisplayGPhotobook(false);
           }}
         >
           X

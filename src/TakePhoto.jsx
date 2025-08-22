@@ -1,6 +1,7 @@
 import {useState, useRef} from "react";
 import Webcam from "react-webcam";
 import GlobalSubmission from "./GlobalSubmission";
+import "./TakePhoto.css"
 
 export default function TakePhoto(props){
   const cameraRef = useRef(null);
@@ -68,6 +69,8 @@ export default function TakePhoto(props){
   return (
     <main className = "black-box">
       {(!displayGS && !displayGSPrompt) &&
+      <main className="photoshoot-box-container">
+
         <div className = "camera-snap-container">
           <section className = "polaroid-frame">
           
@@ -102,7 +105,7 @@ export default function TakePhoto(props){
               s n a p !
             </button>
           }
-
+        </div>
           <form onSubmit = {uploadImage} className = "submit-container">
             <textarea 
               placeholder="Enter description here..." 
@@ -118,12 +121,12 @@ export default function TakePhoto(props){
               s u b m i t ?
             </button>
           </form>
-        </div>
-      
+       
+      </main>
       }
 
       {displayGSPrompt &&
-        <section className="global-submission-prompt">
+        <section className="gs-prompt-container">
           <h1>Would You like to submit to the shared photobook?</h1>
           <small>Note: This action can't be reversed...</small>
           <div className="gs-buttons-container">

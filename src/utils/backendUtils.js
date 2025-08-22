@@ -14,13 +14,13 @@ export async function getDatabaseEntries()
 export async function getDatabaseEntriesQuery(pageNum){
   let data = [];
 
-  fetch(`https://basil-photobook.onrender.com/entries?pageNum=${pageNum}`)
+  await fetch(`https://basil-photobook.onrender.com/entries?pageNum=${pageNum}`)
     .then(res => res.json())
     .then(entries => data = entries)
     .catch(err => console.error("Unable to connect to backend", err))
 
   console.log("data in function", data);
-  return data
+  return data;
 }
 
 //all arguments are strings
