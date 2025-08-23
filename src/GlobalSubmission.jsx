@@ -4,6 +4,7 @@
 
 import characters from "./assets/Selections/characters.js";
 import { uploadToDatabase } from "./utils/backendUtils.js";
+import "./GlobalSubmission.css"
 //props will likely be the image and description
 export default function GlobalSubmission(props) {
 
@@ -23,69 +24,70 @@ export default function GlobalSubmission(props) {
 
   }
   return (
-    <main>
+    <main className="global-submission-container">
       <form onSubmit={handleSubmit}>
-        <input type="text" name="userName" placeholder="Enter name..." required aria-label="name-input"/>"
+        <input type="text" name="userName" placeholder="Enter name..." required aria-label="name-input" className="name-input"/>
 
         <section className="characters-container">
 
-          <div className="boys-selection">
-            <label>
+          <div className="gender-selection">
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="boy1" required/>
               <img src={characters["boy1"]}/>
             </label>
 
-            <label>
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="boy2"/>
               <img src={characters["boy2"]}/>
             </label>
 
-            <label>
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="boy3"/>
               <img src={characters["boy3"]}/>
             </label>
 
-            <label>
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="boy4"/>
               <img src={characters["boy4"]}/>
             </label>
 
-            <label>
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="boy5"/>
               <img src={characters["boy5"]}/>
             </label>
           </div>
 
-          <div className="girls-selection">
-            <label>
+          <div className="gender-selection">
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="girl1" required/>
               <img src={characters["girl1"]}/>
             </label>
 
-            <label>
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="girl2"/>
               <img src={characters["girl2"]}/>
             </label>
 
-            <label>
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="girl3"/>
               <img src={characters["girl3"]}/>
             </label>
 
-            <label>
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="girl4"/>
               <img src={characters["girl4"]}/>
             </label>
 
-            <label>
+            <label className="character-container">
               <input type="radio" name="characterSelection" value="girl5"/>
               <img src={characters["girl5"]}/>
             </label>
           </div>
 
-          <button type="submit" className="submit-global">Submit</button>
 
         </section>
+        
+        <button type="submit" className="submit-global">Submit</button>
 
       </form>
     </main>

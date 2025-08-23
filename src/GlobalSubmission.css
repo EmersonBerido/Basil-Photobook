@@ -1,0 +1,105 @@
+:root {
+  --charactersContainerFlexDirection : row;
+  --genderSelectionFlexDirection : column; 
+  --genderSelectionWidth : 30%;
+  --genderSelectionHeight : 100%;
+  --genderSelectionGap : 0%;
+  --charSelectionHeight : 20%;
+  --charSelectionWidth : 100%;
+}
+@media (min-width : 600px) {
+  :root {
+    --charactersContainerFlexDirection : column;
+    --genderSelectionFlexDirection : row;
+    --genderSelectionWidth : 90%;
+    --genderSelectionHeight : auto;
+    --genderSelectionGap : 0%;
+    --charSelectionHeight : auto;
+    --charSelectionWidth : 20%;
+
+
+  }
+}
+.global-submission-container {
+  width: 100%;
+  height: 100%;
+  display : flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.global-submission-container > form {
+  width: 90%;
+  height : 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.name-input {
+  background-color: black;
+  color: white;
+  border : 3px solid white;
+  border-radius: 3px;
+  width : 30%;
+  height: 8%;
+  font-size: 1.5em;
+  text-align: center;
+}
+.name-input::placeholder {
+  font-size : 1em;
+}
+.characters-container {
+  display: flex;
+  flex-direction: var(--charactersContainerFlexDirection);
+  align-items: center;
+  justify-content: space-evenly;
+  gap : 5%;
+  width : 90%;
+  height: 70%;
+}
+.gender-selection {
+
+  width: var(--genderSelectionWidth);
+  height: var(--genderSelectionHeight);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: var(--genderSelectionFlexDirection);
+  width: var(--genderSelectionWidth);
+  gap : var(--genderSelectionGap);
+}
+.character-container {
+  display: flex;
+  justify-content: center;
+  height : var(--charSelectionHeight);
+  width : var(--charSelectionWidth);
+  aspect-ratio: 1/1;
+}
+.character-container:hover {
+  cursor: pointer;
+  box-shadow : 0 0 2px 6px white;
+}
+.character-container:has(input:checked) {
+  box-shadow : 0 0 2px 6px white;
+}
+.character-container input{
+  display: none;
+}
+.character-container img {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+
+  aspect-ratio: 1/1;
+
+}
+.submit-global {
+  background-color: black;
+  color: white;
+  border : 3px solid white;
+  border-radius: 3px;
+  height : 10%;
+  aspect-ratio: 2.5/1;
+  font-size: 2em;
+}
