@@ -1,5 +1,15 @@
+:root {
+  --photobookImage : url("./assets/Page.png");
+}
+@media (min-width: 600px) {
+  :root{
+    --photobookImage : url("./assets/Page.png");
+    --photobookImage : url("./assets/Photobook-finalized.png");
+  }
+}
+
 .global-photobook-container {
-  background-image: url("./assets/Photobook-finalized.png");
+  background-image: var(--photobookImage);
   background-size: 100% 100%;
   background-repeat: no-repeat;
   filter: brightness(0.95);
@@ -13,7 +23,17 @@
   align-items: center;
   width : 80%;
   height : 80%;
-  border : 3px solid red;
+  border : 10px solid #000000;
+  border-radius: 6px;
+}
+.single-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border : 3px solid pink;
+  height: 80%;
+  width: 90%;
 }
 .pages-container {
   border : 3px solid orange;
@@ -31,7 +51,31 @@
   width: 50%;
 
 }
-
+.entryG{
+  display: flex;
+  border : 3px solid orange;
+  align-items: center;
+  justify-content: space-between;
+}
+.polaroidG{
+  border : 3px solid #b1b1b1;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width : 30%;
+  height : 95%;
+  padding : 5%;
+}
+ .photoG {
+  width : 100%;
+  aspect-ratio: 1/1;
+  border : 3px solid #b1b1b1;
+}
+.descriptionG {
+  border : 3px solid blue;
+  width : 50%;
+}
 
 .page-number-container{
   border : 3px solid green;

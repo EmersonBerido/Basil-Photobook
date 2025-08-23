@@ -12,6 +12,10 @@ export async function getDatabaseEntries()
 }
 
 export async function getDatabaseEntriesQuery(pageNum){
+  if (pageNum <= 0 ) {
+    console.error("Please use a page number greater than 0");
+    return [];
+  }
   let data = [];
 
   await fetch(`https://basil-photobook.onrender.com/entries?pageNum=${pageNum}`)
