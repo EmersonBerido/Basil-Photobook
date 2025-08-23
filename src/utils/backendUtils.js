@@ -23,7 +23,6 @@ export async function getDatabaseEntriesQuery(pageNum){
     .then(entries => data = entries)
     .catch(err => console.error("Unable to connect to backend", err))
 
-  console.log("data in function", data);
   return data;
 }
 
@@ -52,5 +51,4 @@ export async function uploadToDatabase(name, image, character, description){
     console.error("Error in uploadToDatabase:", err);
   }
 
-  console.log("leaving function...")
 }

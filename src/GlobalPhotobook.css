@@ -26,24 +26,32 @@
   border : 10px solid #000000;
   border-radius: 6px;
 }
+.loading-cat {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap : 15%;
+  text-align: center;
+  font-size: 2.5em;
+}
 .single-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  border : 3px solid pink;
   height: 80%;
   width: 90%;
 }
 .pages-container {
-  border : 3px solid orange;
   display: flex;
   justify-content: center;
   width : 90%;
   height: 90%;
 }
 .page-container {
-  border : 3px solid yellow;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -53,36 +61,97 @@
 }
 .entryG{
   display: flex;
-  border : 3px solid orange;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  height: 30%;
 }
 .polaroidG{
+  all: unset;
   border : 3px solid #b1b1b1;
-  background-color: white;
+  background-color: #f8f8f8;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width : 30%;
-  height : 95%;
+  width : 100%;
+  max-width: 125px;
+  aspect-ratio: 0.75/1;
+  max-height: 150px;
   padding : 5%;
 }
- .photoG {
+.polaroidG:hover {
+  box-shadow : 0 0 3px 6px black;
+}
+.photoG {
   width : 100%;
   aspect-ratio: 1/1;
   border : 3px solid #b1b1b1;
 }
 .descriptionG {
-  border : 3px solid blue;
   width : 50%;
 }
 
 .page-number-container{
-  border : 3px solid green;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position : absolute;
   bottom: 3%;
   width : 90%;
-  height : 10%;
+  height : 12%;
+}
+.prev-pageG {
+  max-height: 100%;
+  aspect-ratio: 1.5/1;
+  position: absolute;
+  left:0;
+  transform: rotate(180deg);
+  background-color: transparent;
+  border : none;
+}
+.next-pageG {
+  height: 100%;
+  aspect-ratio: 1.5/1;
+  position: absolute;
+  right:0;
+  background-color: transparent;
+  border : none;
+}
+.next-pageG img, .prev-pageG img{
+  height: 100%;
+  width: 100%;
+}
+.next-pageG > img:hover, .prev-pageG > img:hover {
+  content : url("./assets/arrow.png");
+}
+.zoom-char-name-container {
+  border : 3px solid pink;
+  width : 95%;
+  height: 10%;
+}
+.zoom-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: black;
+  padding: 10px;
+  border : 3px solid white;
+  top: -30%;
+  height: 10%;
+  text-align: center;
+  
+}
+.zoom-character {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position : absolute;
+  top : -70%;
+  right : 0;
+  height: 60%;
+  max-width: 150px;
+  aspect-ratio: 1/1;
+
+  background-color: black;
+  border : 5px solid white;
 }

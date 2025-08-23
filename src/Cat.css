@@ -1,0 +1,29 @@
+.cat {
+  position : relative;
+}
+.cat-body {
+  position : absolute;
+  left : 50%;
+  top: 50%;
+  transform : translate(-50%, -50%);
+  z-index: 1;
+}
+.cat-tail {
+  position: absolute;
+  transform: scale(30%);
+  left : 50%;
+  top: 50%;
+  transform-origin: bottom;
+  transform : translate(-90%, -60%) scale(80%);
+  animation: tail-wag 3s infinite ease-in alternate;
+
+  
+}
+@keyframes tail-wag {
+  0%{
+    transform: translate(-90%, -75%) scale(80%) rotate(-20deg);
+  }
+  100%{
+    transform: translate(-90%, -75%) scale(80%) rotate(-70deg);
+  }
+}

@@ -127,17 +127,17 @@
 .zoom-textbox {
   margin-bottom: 0.5%;
   border : 5px solid white;
-  box-shadow : 0 0 0px 5px black;
   background-color: black;
   color : white;
   width : 95%;
   height : 25%;
   font-size : 5vmin;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
   word-wrap: break-word;
-  overflow: hidden;
+  overflow: visible;
 }
 .zoom-description {
   width : 99%;
@@ -146,11 +146,12 @@
 
 }
 .text-exit {
-  position :fixed;
-  bottom : -50px;
-  right : 40px;
-  width : 10vmin;
-  height : 5vmin;
+  position :absolute;
+  bottom : 10%;
+  right : 10px;
+  height : 20%;
+
+  aspect-ratio: 1/0.5;
   background-color: transparent;
   border: none;
 

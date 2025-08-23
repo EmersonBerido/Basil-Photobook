@@ -3,30 +3,15 @@ import {useRef} from "react"
 import {useState} from "react"
 import {useEffect} from "react"
 import './Photoshoot.css'
-import Webcam from "react-webcam";
 import Photobook from "./Photobook";
 import TakePhoto from "./TakePhoto.jsx";
 import GlobalPhotobook from "./GlobalPhotobook.jsx";
 import cat from "./assets/meow.png";
-import characters from "./assets/Selections/characters.js";
-
-import GlobalSubmission from "./GlobalSubmission.jsx";
-
-//utils
-import { getDatabaseEntries } from "./utils/backendUtils.js";
 
 
 //Components
 
 export default function App() {
-
-  useEffect(() => {
-    (async () => {
-      const data = await getDatabaseEntries();
-      console.log("data from backend", data);
-    })()
-
-  }, [])
 
   const [displayCamera, setDisplayCamera] = useState(false);
   const [displayPhotobook, setDisplayPhotobook] = useState(false)

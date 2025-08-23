@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { getDatabaseEntries, getDatabaseEntriesQuery } from "./utils/backendUtils";
 import TextImage1 from "./assets/journal-entry-1.png";
 import TextImage2 from "./assets/journal-entry-2.png";
+import Characters from "./assets/Selections/characters";
+import BlueHand from "./assets/blue-hand.png"
+import arrow from "./assets/normal-arrow.png"
 import "./GlobalPhotobook.css";
+import Cat from "./Cat.jsx"
 
 export default function GlobalPhotobook(){
   const [globalEntries, setGlobalEntries] = useState([]);
@@ -11,8 +15,9 @@ export default function GlobalPhotobook(){
   const [windowWidth, setWindowWidth] = useState(document.documentElement.clientWidth);
   const [isMobile, setIsMobile] = useState(windowWidth < 600);
 
-  console.log("window width:", windowWidth)
-  console.log("isMobile:",isMobile, "displayRightPage:",displayRightPage)
+  const [zoomDisplay, setZoomDisplay] = useState(null);
+  
+
 
   //checks if pageNumber is less than 0
   useEffect(() => {
@@ -28,7 +33,6 @@ export default function GlobalPhotobook(){
     })();
 
   }, [pageNumber])
-  console.log("pg num", pageNumber)
 
   window.addEventListener("resize", () => {
     if (window.innerWidth > 600) {
@@ -41,7 +45,6 @@ export default function GlobalPhotobook(){
       setWindowWidth(window.innerWidth);
     }
   })
-  console.log("New Size", windowWidth)
 
   function incrementPageNumber() {
     if (isMobile && !displayRightPage) {
@@ -69,13 +72,26 @@ export default function GlobalPhotobook(){
     }
   }
 
+  function zoomInGlobalPhoto(entry){
+    setZoomDisplay(() => {
+      console.log(`adding name: ${entry.name}, image:${entry.photo}`);
+      return {
+        name : entry.name,
+        image : entry.photo,
+        description : entry.description,
+        character : entry.characterSelection
+      }
+    })
+  }
+
   const entries = globalEntries.map((entry, index) => {
     if (index % 2 === 0) {
       return (
-        <main className="entryG">
-          <div className="polaroidG">
+        <main className="entryG" key={index}>
+          
+          <button className="polaroidG" onClick={() => zoomInGlobalPhoto(entry)}>
             <img src={entry.photo} className="photoG"/>
-          </div>
+          </button>
   
           <img src={TextImage1} className="descriptionG"/>
         </main>
@@ -83,12 +99,12 @@ export default function GlobalPhotobook(){
     }
     else {
       return (
-        <main className="entryG">
+        <main className="entryG" key={index}>
           <img src={TextImage1} className="descriptionG"/>
           
-          <div className="polaroidG">
+          <button className="polaroidG" onClick={() => zoomInGlobalPhoto(entry)}>
             <img src={entry.photo} className="photoG"/>
-          </div>
+          </button>
         </main>
       )
     }
@@ -100,6 +116,14 @@ export default function GlobalPhotobook(){
 
   return (
     <main className="global-photobook-container">
+      {globalEntries.length <= 0 && 
+      <section className="loading-cat">
+        <Cat/>
+        <h1>Loading...</h1>
+
+      </section>
+      }
+      
       {isMobile 
         ?
         displayRightPage 
@@ -124,16 +148,32 @@ export default function GlobalPhotobook(){
       }
       <section className="page-number-container">
         {(pageNumber > 1 || displayRightPage)&&
-          <button onClick={decrementPageNumber}>
-            prev
+          <button onClick={decrementPageNumber} className="prev-pageG">
+            <img src={arrow}/>
           </button>
         }
         {globalEntries.length > 0 &&
-          <button onClick={incrementPageNumber}>
-            next
+          <button onClick={incrementPageNumber} className="next-pageG">
+            <img src={arrow}/>
           </button>
         }
       </section>
+
+      {zoomDisplay !== null &&
+        <section className = "zoom-container">
+          <img className = "zoom-polaroid" src = {zoomDisplay.image}/>
+          
+          <div className="zoom-textbox">
+            <p className = "zoom-description">{zoomDisplay.description}</p>
+            <p className="zoom-name">{zoomDisplay.name}</p>
+            <img className="zoom-character" src={Characters[zoomDisplay.character]}/>
+            <button className = "text-exit" onClick = {() => setZoomDisplay(null)}>
+              <img src = {BlueHand}/>
+            </button>
+          </div>
+          
+        </section>
+      }
     </main>
   )
 }
