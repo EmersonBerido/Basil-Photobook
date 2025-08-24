@@ -3,8 +3,10 @@
   margin: 0;
 }
 body {
+  width: 100%;
+  height: 100%;
   background-image: url("./assets/Photobook-background-sky-reduced.png");
-
+  overflow-y: scroll;
 }
 
 @font-face {

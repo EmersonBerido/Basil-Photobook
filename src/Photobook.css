@@ -35,6 +35,10 @@
   gap : 5%;
 }
 .zoom-polaroid{
+  position: absolute;
+  top : 40%;
+  left : 50%;
+  transform: translate(-50%, -50%);
   width : 43vmin;
   height : 45vmin;
   border : 5px solid gray;
