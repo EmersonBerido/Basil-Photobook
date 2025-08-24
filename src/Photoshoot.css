@@ -106,10 +106,13 @@
 }
 .exit-button {
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   left : 10px;
   top : 10px;
-  width : 70px;
-  height : 70px;
+  width : 100px;
+  aspect-ratio: 1/1;
   color : white;
   background-color: black;
   font-size: 70px;

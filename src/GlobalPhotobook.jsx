@@ -9,6 +9,7 @@ import "./GlobalPhotobook.css";
 import Cat from "./Cat.jsx"
 
 export default function GlobalPhotobook(){
+  const [isLoading, setIsLoading] = useState(true);
   const [globalEntries, setGlobalEntries] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
   const [displayRightPage, setDisplayRightPage] = useState(false);
@@ -28,8 +29,9 @@ export default function GlobalPhotobook(){
     let data = [];
 
     (async () => {
-      data = await getDatabaseEntriesQuery(pageNumber)
+      const data = await getDatabaseEntriesQuery(pageNumber)
       setGlobalEntries(data);
+      setIsLoading(false);
     })();
 
   }, [pageNumber])
@@ -87,7 +89,7 @@ export default function GlobalPhotobook(){
   const entries = globalEntries.map((entry, index) => {
     if (index % 2 === 0) {
       return (
-        <main className="entryG" key={index}>
+        <main className="entryG" key={`globalEntry-${index}`}>
           
           <button className="polaroidG" onClick={() => zoomInGlobalPhoto(entry)}>
             <img src={entry.photo} className="photoG"/>
@@ -113,10 +115,9 @@ export default function GlobalPhotobook(){
   const leftPage = entries.slice(0,3);
   const rightPage = entries.slice(3);
 
-
   return (
     <main className="global-photobook-container">
-      {globalEntries.length <= 0 && 
+      {isLoading && 
       <section className="loading-cat">
         <Cat/>
         <h1>Loading...</h1>
@@ -152,12 +153,13 @@ export default function GlobalPhotobook(){
             <img src={arrow}/>
           </button>
         }
-        {globalEntries.length > 0 &&
+        {globalEntries.length > 3 &&
           <button onClick={incrementPageNumber} className="next-pageG">
             <img src={arrow}/>
           </button>
         }
       </section>
+      
 
       {zoomDisplay !== null &&
         <section className = "zoom-container">
