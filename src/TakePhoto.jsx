@@ -103,7 +103,7 @@ export default function TakePhoto(props){
             </button> 
             :
             <button onClick = {capture} className = "snap">
-              s n a p !
+              snap!
             </button>
           }
         </div>
@@ -119,7 +119,7 @@ export default function TakePhoto(props){
               type = "submit"
               className = "submit"
             >
-              s u b m i t ?
+              submit?
             </button>
           </form>
        
