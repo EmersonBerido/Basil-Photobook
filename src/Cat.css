@@ -14,16 +14,16 @@
   left : 50%;
   top: 50%;
   transform-origin: bottom;
-  transform : translate(-90%, -60%) scale(80%);
-  animation: tail-wag 3s infinite ease-in alternate;
+  transform : translate(-90%, -70%) scale(80%);
+  animation: tail-wag 2.5s infinite ease-in-out alternate;
 
   
 }
 @keyframes tail-wag {
   0%{
-    transform: translate(-90%, -75%) scale(80%) rotate(-20deg);
+    transform: translate(-90%, -70%) scale(80%) rotate(-20deg);
   }
   100%{
-    transform: translate(-90%, -75%) scale(80%) rotate(-70deg);
+    transform: translate(-90%, -70%) scale(80%) rotate(-60deg);
   }
 }

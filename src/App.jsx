@@ -7,7 +7,7 @@ import Photobook from "./Photobook";
 import TakePhoto from "./TakePhoto.jsx";
 import GlobalPhotobook from "./GlobalPhotobook.jsx";
 import cat from "./assets/meow.png";
-
+import Cat from "./Cat.jsx"
 
 //Components
 
@@ -15,15 +15,16 @@ export default function App() {
 
   const [displayCamera, setDisplayCamera] = useState(false);
   const [displayPhotobook, setDisplayPhotobook] = useState(false)
-  const [localStorageIndex, setLocalStorageIndex] = useState(localStorage.length);
   const [displayGPhotobook, setDisplayGPhotobook] = useState(false);
+  const [promptErase, setPromptErase] = useState(false);
 
 
   function EraseAllEntries() {
     localStorage.clear();
-    setLocalStorageIndex(0);
     alert("Cleared all entries in photobook :3")
   }
+
+
 
   return (
     <main className = "program">
@@ -32,22 +33,47 @@ export default function App() {
       <header className = "menu">
         <h1>Photobook</h1>
         <button
-          className = "camera-option"
+          className = "option"
           onClick={() => setDisplayCamera(true)}
         >
           Take Pictures
         </button>
         <button
-          className="photobook-option"
+          className="option"
           onClick={() => setDisplayPhotobook(true)}
         >
           Photobook
         </button>
-        <button onClick={() => setDisplayGPhotobook(true)}>
+        <button 
+          className="option"
+          onClick={() => setDisplayGPhotobook(true)}
+        >
           Global
         </button>
+        <button 
+          onClick={() => setPromptErase(true)}
+          className="erase-option"
+        >
+          <Cat/>
+        </button>
+
+        {promptErase &&
+          <main className="erase-container">
+            <h1>Clear Photobook?</h1>
+            <section className="erase-buttons-container">
+              <button onClick={() => setPromptErase(false)}>
+                No
+              </button>
+              <button onClick={EraseAllEntries}>
+                Yes
+              </button>
+            </section>
+          </main>
+        }
+        
       </header>
       }
+
 
       {displayCamera && 
         <TakePhoto
@@ -75,11 +101,6 @@ export default function App() {
           X
         </button>
       }
-
-      <button onClick = {EraseAllEntries} className = "clear-photos-button">
-        <span className = "clear-photos-prompt">Reset?</span>
-        <img src = {cat} className = "reset-cat"/>
-      </button>
 
     </main>
 

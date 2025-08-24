@@ -1,4 +1,12 @@
+:root {
+  --menuWidth : 90vw;
+}
 
+@media (min-width : 600px){
+  :root {
+    --menuWidth : 70vmin;
+  }
+}
 
 .program {
   display: flex;
@@ -11,14 +19,16 @@
 
 .menu {
   border : 5px solid white;
-  width : 70vmin;
-  height : 70vmin;
+  width : var(--menuWidth);
+  aspect-ratio: 1/1;
   color : white;
   background-color: black;
   display : flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  position : relative;
 }
 
 .menu > h1 {
@@ -36,13 +46,64 @@
   margin-top : 5%;
 }
 
-.camera-option, .photobook-option {
+.option {
   color : white;
   background-color: black;
   border : 5px solid white;
   border-radius: 3px;
+  font-size : 1.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.option:hover {
+  background-color: white;
+  color : black;
+}
+.erase-option {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  bottom : 8%;
+  left : 5%;
+  max-width : 20%;
 
+}
+.erase-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index : 1;
+  border : 5px solid white;
+  background-color: black;
+  color : white;
+  width : 60%;
+  height : 40%;
+  gap : 10%;
+  font-size : 1.5em;
+}
+.erase-buttons-container {
+  width : 60%;
+  height : 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.erase-buttons-container button {
+  width : 40%;
+  height : 100%;
+  background-color: black;
+  color : white;
+  border : 3px solid white;
+  font-size : 1em;
+  font-weight : bold;
+}
+.erase-buttons-container button:hover {
+  background-color: white;
+  color : black;
+}
 .exit-button {
   position: fixed;
   left : 10px;
@@ -54,37 +115,4 @@
   font-size: 70px;
   font-weight: bold;
   border: 5px solid white;
-}
-.clear-photos-button {
-  position : fixed;
-  left : 0;
-  bottom : 0;
-  width : 8vmax;
-  height: auto;
-  background-color: transparent;
-  border : none;
-}
-.clear-photos-button .clear-photos-prompt{
-  visibility: hidden;
-}
-.clear-photos-button:hover .clear-photos-prompt{
-  visibility: visible;
-}
-.clear-photos-prompt {
-  position: relative;
-  bottom : 10px;
-  color : white;
-  background-color: black;
-  border : 2px solid white;
-  font-size: 3vmax;
-  width : 100%;
-  height: auto;
-  padding : 5%;
-}
-.reset-cat {
-  background-color: transparent;
-  border : none;
-  height : 100%;
-  width : 100%;
-
 }
