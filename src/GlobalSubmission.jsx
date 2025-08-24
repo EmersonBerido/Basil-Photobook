@@ -26,7 +26,7 @@ export default function GlobalSubmission(props) {
   return (
     <main className="global-submission-container">
       <form onSubmit={handleSubmit}>
-        <input type="text" name="userName" placeholder="Enter name..." required aria-label="name-input" className="name-input"/>
+        <input type="text" name="userName" placeholder="Enter name..." required aria-label="name-input" className="name-input" maxLength={13}/>
 
         <section className="characters-container">
 

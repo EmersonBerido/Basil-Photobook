@@ -9,6 +9,9 @@ import Arrow from "./assets/normal-arrow.png"
 export default function Photobook(){
   const [pageNumber, setPageNumber] = useState(0);
   const [zoomDisplay, setZoomDisplay] = useState(null);
+  const [displayRightPage, setDisplayRightPage] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(document.documentElement.clientWidth);
+  const [isMobile, setIsMobile] = useState(windowWidth < 600);
 
   //checks if pageNumber is less than 0
   useEffect(() => {
@@ -29,9 +32,45 @@ export default function Photobook(){
         description : entry.description
       }
     })
-    
-    
   }
+
+  function incrementPageNumber() {
+    if (isMobile && !displayRightPage) {
+      setDisplayRightPage(true);
+    }
+    else if(isMobile && displayRightPage) {
+      setPageNumber(prev => prev + 1);
+      setDisplayRightPage(false);
+    }
+    else {
+      setPageNumber(prev => prev + 1);
+    }
+  }
+
+  function decrementPageNumber() {
+    if (isMobile && displayRightPage) {
+      setDisplayRightPage(false);
+    }
+    else if (isMobile && !displayRightPage) {
+      setDisplayRightPage(true);
+      setPageNumber(prev => prev - 1)
+    }
+    else {
+      setPageNumber(prev => prev - 1);
+    }
+  }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 600) {
+      setIsMobile(false);
+      setDisplayRightPage(false);
+      setWindowWidth(window.innerWidth);
+    }
+    else {
+      setIsMobile(true);
+      setWindowWidth(window.innerWidth);
+    }
+  })
 
   //creates visible entries for photobook
   const startingIndex = Math.abs(pageNumber * 6);
@@ -45,33 +84,29 @@ export default function Photobook(){
 
       //localstorage version
       entries.push(
-      <section className = "entry">
-          <button
+      <section className = "entryG">
+          <button 
+            className = "polaroidG"
             onClick = {() => zoomInPhoto(JSON.parse(localStorage.getItem(i)))}
-            className = "description-button"
           >
-            <div className = "polaroid">
-              <img src = {JSON.parse(localStorage.getItem(i)).image} className = "photo"/>
-            </div>
-            <img src = {TextImage1} />
+            <img src = {JSON.parse(localStorage.getItem(i)).image} className = "photoG"/>
           </button>
-        </section>
+          <img src = {TextImage1} className="descriptionG"/>
+      </section>
       );
     }
     else
     {
       entries.push(
-        <section className = "entry">
-        <button
-            onClick = {() => zoomInPhoto(JSON.parse(localStorage.getItem(i)))}
-            className = "description-button"
-          >
-            <img src = {TextImage2} />
+        <section className = "entryG">
+          <img src = {TextImage2} className="descriptionG"/>
 
-            <div className = "polaroid">
-              <img src = {JSON.parse(localStorage.getItem(i)).image} className = "photo"/>
-            </div>
-        </button>
+          <button 
+            className = "polaroidG"
+            onClick = {() => zoomInPhoto(JSON.parse(localStorage.getItem(i)))}
+          >
+            <img src = {JSON.parse(localStorage.getItem(i)).image} className = "photoG"/>
+          </button>
       </section>
       );
     }
@@ -81,30 +116,45 @@ export default function Photobook(){
   const rightPage = entries.slice(3);
 
   return(
-    <section className = "book">
-      <main className = "pages">
-        <div className = "leftPage">
-          {leftPage}
-        </div>
-        <div className = "rightPage">
-          {rightPage}
-        </div>
-      </main>
+    <section className = "global-photobook-container">
+      {isMobile 
+        ?
+        displayRightPage 
+          ?
+            <div className="single-page-container">
+              {rightPage}
+            </div> 
+          : 
+            <div className="single-page-container">
+              {leftPage}
+            </div>
+        :
+        <section className="pages-container">
+          <div className="page-container">
+            {leftPage}
+          </div>
+          <div className="page-container">
+            {rightPage}
+          </div>
 
-      <div className = "button-container">
+        </section>
+      }
+
+      <div className = "page-number-container">
 
         <button 
-          onClick = {() => setPageNumber(prev => prev - 1)}
-          className = "prev-page"
+          onClick = {decrementPageNumber}
+          className = "prev-pageG"
         >
-          {pageNumber !== 0 && <img src = {Arrow} alt = "prev page"/>}
+          {(pageNumber !== 0 || (isMobile && displayRightPage) ) && <img src = {Arrow} alt = "prev page"/>}
         </button>
 
         <button 
-          onClick = {() => setPageNumber(prev => prev + 1)}
-          className = "next-page"
+          onClick = {incrementPageNumber}
+          className = "next-pageG"
         >
-          {(1 + pageNumber) * 6 < localStorage.length && <img src = {Arrow} alt = "next page"/> }
+          {(((1 + pageNumber) * 6 < localStorage.length) || (isMobile && !displayRightPage))
+           && <img src = {Arrow} alt = "next page"/> }
         </button>
       </div>
 

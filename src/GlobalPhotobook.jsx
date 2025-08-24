@@ -100,7 +100,7 @@ export default function GlobalPhotobook(){
     else {
       return (
         <main className="entryG" key={index}>
-          <img src={TextImage1} className="descriptionG"/>
+          <img src={TextImage2} className="descriptionG"/>
           
           <button className="polaroidG" onClick={() => zoomInGlobalPhoto(entry)}>
             <img src={entry.photo} className="photoG"/>
