@@ -6,25 +6,27 @@ A full-stack web application that lets user create and post pictures to a commun
 [Click to view photobook](https://emersonberido.github.io/Basil-Photobook/)
 
 ## Technologies
-- Vite
-- React.js
-- Node.js
-- Express.js
-- MongoDB
-- CSS
-- Cloudinary
+- Frontend: React
+- Backend: Express.js, Node.js
+- Database: MongoDB Atlas
+- Cloud Storage: Cloudinary
+- Deployment: Render
 
 ## Features
-- **Take Photos**: Go to the "Take Photo" button to begin photo process.
-- **Description**: Add an additional description of the photo. It can be descriptive, simple, or whatever you desire!
-- *Global Features*:
-  - **Upload Online**: Choose whether or not to enter your entry into the global photobook.
-  - **Choose Avatar**: Pick which character best suits your appearance.
-  - **Name**: Enter the name in which people online will view.
-- **Photobook**: Browse between your own personal photobook, or even the communative photobook!
+- Take pictures and upload them into custom albums
+- Cloudinary integration for optimized image storage and delivery
+- Album browsing with responsive design and dynamic routing
+- Backend API with RESTful endpoints
 
 ## What I Learned
+- Best practices for cloud storage integration and image optimization
+- Debugging deployment issues across frontend/backend pipelines
+- Utilizing LocalStorage to save entries in a user's computer
 
 ## Improvements?
+- Integrate analytics to track album views and user engagement
+- Modularize frontend components for better scalability
+- Add unit tests for backend and frontend logic
+- Enable public album visibility toggles
 
 ## Screenshots
