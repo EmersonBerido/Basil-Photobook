@@ -30,3 +30,16 @@ A full-stack web application that lets user create and post pictures to a commun
 - Enable public album visibility toggles
 
 ## Screenshots
+### Home Page
+
+<img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/515fdd1d-bdde-4b3a-9c2d-32097c2202a0" />
+
+### Photobook
+
+<img width="1879" height="980" alt="image" src="https://github.com/user-attachments/assets/4ba06798-dfca-4c58-be93-f6ed2417cabb" />
+
+### Photo View
+
+<img width="900" height="490" alt="image" src="https://github.com/user-attachments/assets/d436fe07-47df-4970-b841-80ad427862d7" />
+
+
